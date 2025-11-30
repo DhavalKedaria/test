@@ -1,19 +1,27 @@
-# Simple GitHub Actions workflow that only echoes a success message.
-# Save this file as: .github/workflows/echo-success.yml
-
-name: Echo Success
+name: Select & Print
 
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Choose a message to print'
+        required: true
+        type: choice
+        # the UI will show these options as a dropdown
+        options:
+          - "hello world"
+          - "welcome"
+        default: "hello world"
 
 jobs:
-  echo:
+  print:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Echo pipeline result
+      - name: Show chosen input (raw)
         run: |
-          echo "pipeline run successfully"
+          echo "Raw input context: '${{ toJson(github.event.inputs) }}'"
+
+      - name: Print selected message
+        run: |
+          # github.event.inputs.message contains the selected value
+          echo "Selected message: ${{ github.event.inputs.message }}"
