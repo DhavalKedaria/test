@@ -1,0 +1,19 @@
+# Simple GitHub Actions workflow that only echoes a success message.
+# Save this file as: .github/workflows/echo-success.yml
+
+name: Echo Success
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Echo pipeline result
+        run: |
+          echo "pipeline run successfully"
