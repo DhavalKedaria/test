@@ -1,3 +1,9 @@
-def dhaval():
-    data= "this is test app and from dhaval Branch code"
-    return data
+import uuid
+
+data= uuid.uuid2()
+
+print(data)
+
+#this are the ch
+
+001

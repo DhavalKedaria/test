@@ -1,0 +1,27 @@
+name: Select & Print
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Choose a message to print'
+        required: true
+        type: choice
+        # the UI will show these options as a dropdown
+        options:
+          - "hello world"
+          - "welcome"
+        default: "hello world"
+
+jobs:
+  print:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show chosen input (raw)
+        run: |
+          echo "Raw input context: '${{ toJson(github.event.inputs) }}'"
+
+      - name: Print selected message
+        run: |
+          # github.event.inputs.message contains the selected value
+          echo "Selected message: ${{ github.event.inputs.message }}"
